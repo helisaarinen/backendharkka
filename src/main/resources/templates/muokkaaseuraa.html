@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Muokkaa seuraa</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muokkaa seuraa</h1>
+	<div>
+
+		<form th:object="${seura}" th:action="@{../tallennaSeura}" action="#" method="post">
+		<input type="hidden" th:field="*{seura_id}" /> 
+		
+		<label for="nimi">Seuran nimi</label>
+		<input type="text" id="nimi" th:field="*{nimi}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="verkkosivu">Verkkosivu</label>
+		<input type="text" id="verkkosivu" th:field="*{verkkosivu}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<label for="deplist">Kunta</label>
+		<select id="deplist" th:field="*{kunta}" class="form-control">
+		<option th:each="kunta: ${kunnat}" th:value="${kunta.kunta_id}"
+		th:text="${kunta.kunnannimi}">
+		</option>
+		</select>
+
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input class="btn btn-success" type="submit" title="Tallenna"
+		value="Tallenna"></input>
+		
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Muokkaa joukkuetta</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Muokkaa joukkuetta</h1>
+	<div>
+
+		<form th:object="${joukkue}" th:action="@{../tallenna}" action="#" method="post">
+		<input type="hidden" th:field="*{joukkue_id}" /> 
+		
+		<label for="nimi">Joukkueen nimi</label>
+		<input type="text" id="nimi" th:field="*{nimi}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="yhteyshlo">Yhteyshenkilö</label>
+		<input type="text" id="yhteyshlo" th:field="*{yhteyshlo}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="email">Sähköpostiosoite</label>
+		<input type="text" th:field="*{email}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="puh">Puhelinnumero</label>
+		<input type="text" th:field="*{puh}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<label for="deplist">Seura</label>
+		<select id="deplist" th:field="*{seura}" class="form-control">
+		<option th:each="seura: ${seurat}" th:value="${seura.seura_id}"
+		th:text="${seura.nimi}">
+		</option>
+		</select>
+
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input class="btn btn-success" type="submit" title="Tallenna"
+		value="Tallenna"></input>
+		
+		</form>
+	</div>
+</body>
+</html>

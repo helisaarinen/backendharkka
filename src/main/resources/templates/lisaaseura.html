@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html 
+xmlns:th="http://www.thymeleaf.org"   
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+
+
+<head>
+    <title>Lisää seura</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää seura</h1>
+	<div>
+	<form action="#" th:object="${uusiSeura}" th:action="@{tallennaSeura}" method="post">
+	
+			<div style="margin-bottom: 20px;">
+			<label for="nimi">Seuran nimi</label>
+			<input type="text" id="nimi" th:field="*{nimi}" />
+			<p th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}"
+			style="display: block; color: red;"></p>
+			</div>
+
+			<div style="margin-bottom: 20px;">
+			<label for="verkkosivu">Verkkosivu</label> 
+			<input type="text" id="verkkosivu"	th:field="*{verkkosivu}" />
+			<p th:if="${#fields.hasErrors('verkkosivu')}" th:errors="*{verkkosivu}"
+			style="display: block; color: red;"></p>
+			</div>
+			
+			<div class="col-md-4" style="clear: both; display: block; height: 10px;"></div>
+			<label for="deplist">Kunta</label> 
+			<select id="deplist" th:field="*{kunta}" class="form-control">
+			    <option value=""selected>Valitse kunta</option>
+				<option th:each="kunta: ${kunnat}" th:value="${kunta.kunta_id}"
+					th:text="${kunta.kunnannimi}"></option>
+			</select>
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  
+			<input class="btn btn-success"  type="submit" value="Tallenna"></input>
+					<input class="btn btn-secondary" type="button" value="Peruuta" onclick="window.location.href='/joukkuelistaus'" />
+			
+		</form>
+	
+	</div>
+
+ 	
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Tulos</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää tulos</h1>
+	<div>
+
+		<form th:object="${ottelu}" th:action="@{../tallennaottelutulos}" action="#" method="post">
+		<input type="hidden" th:field="*{ottelu_id}" /> 
+    	<input type="hidden" th:field="*{alkaa}" />
+    	<input type="hidden" th:field="*{loppuu}" />
+	
+		
+		<label for="kotijoukkue.nimi">Kotijoukkue</label>
+		<input type="text" id="kotijoukkue.nimi" th:field="*{kotijoukkue.nimi}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="vierasjoukkue.nimi">Vierasjoukkue</label>
+		<input type="text" id="vierasjoukkue.nimi" th:field="*{vierasjoukkue.nimi}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+		
+		<label for="kotimaalit">Kotijoukkueen maalit</label>
+		<input type="number" id="kotimaalit" th:field="*{kotimaalit}" />
+		<div th:if="${#fields.hasErrors('kotimaalit')}" th:errors="*{kotimaalit}" class="alert alert-danger"></div>
+				<div style="clear: both; display: block; height: 10px;"></div>
+		
+		
+		<label for="vierasmaalit">Vierasjoukkueen maalit</label>
+		<input type="number" id="vierasmaalit" th:field="*{vierasmaalit}" />
+		<div style="clear: both; display: block; height: 10px;"></div>
+	
+		<div style="clear: both; display: block; height: 10px;"></div>
+		<input class="btn btn-success" type="submit" title="Tallenna"
+		value="Tallenna"></input>
+		<input class="btn btn-secondary" type="button" value="Peruuta" onclick="window.location.href='/ottelulistaus'" />
+
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html 
+xmlns:th="http://www.thymeleaf.org"   
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+
+<head>
+    <title>Ottelut</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Ottelut</h1>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h5>Kirjautuneena käyttäjä: <span style= "color: blue" sec:authentication="name">Name</span></h5>
+	<div>
+	        <a href="/joukkuelistaus">Palaa joukkuelistaukseen</a>
+	</div>
+		</div>
+
+	</div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+	<h3>Valmiit ottelut</h3>
+    <table class="table table-striped" >
+		<tr>
+			<th>Aika</th>
+		   	<th>Kotijoukkue</th>
+		    <th></th>
+		    <th>Vierasjoukkue</th>
+		    <th>Maalit</th>	 
+		   	<th sec:authorize="hasAuthority('ADMIN')"></th> 
+		    <th sec:authorize="hasAuthority('ADMIN')"></th>      
+		</tr>  
+		    	
+    	<tr th:each = "ottelu : ${ottelut}" th:if="${ottelu.kotimaalit != null and ottelu.vierasmaalit != null}">
+        <td th:text="${#temporals.format(ottelu.alkaa, 'HH:mm') + ' - ' + #temporals.format(ottelu.loppuu, 'HH:mm')}"></td>
+    		<td th:text="${ottelu.kotijoukkue.nimi}"></td>
+    		<td>-</td>    		
+    		<td th:text="${ottelu.vierasjoukkue.nimi}"></td>
+    		<td th:text="${ottelu.kotimaalit} + ' - ' + ${ottelu.vierasmaalit}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')">
+    			<a class="btn btn-muokkaa" th:href="@{/tulos/{id}(id=${ottelu.ottelu_id})}">Korjaa tulos</a>
+    		</td>
+    		    <td sec:authorize="hasAuthority('ADMIN')">
+    			<a class="btn btn-danger" th:href="@{/poistaottelu/{id}(id=${ottelu.ottelu_id})}">Poista</a>
+    		</td>
+    	</tr>
+    	
+     </table>
+	 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/lisaaottelu">Lisää ottelu</a>    	
+	
+	<h3>Tulevat ottelut</h3> 
+	  <table class="table table-striped" >
+		<tr>
+			<th>Aika</th>
+		   	<th>Kotijoukkue</th>
+		    <th></th>
+		    <th>Vierasjoukkue</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"></th> 		    
+		    <th sec:authorize="hasAuthority('ADMIN')"></th> 
+		</tr>  
+		    	
+    	<tr th:each = "ottelu : ${ottelut}" th:if="${ottelu.kotimaalit == null and ottelu.vierasmaalit == null}">
+        <td th:text="${#temporals.format(ottelu.alkaa, 'HH:mm') + ' - ' + #temporals.format(ottelu.loppuu, 'HH:mm')}"></td>
+    		<td th:text="${ottelu.kotijoukkue.nimi}"></td>
+    		<td>-</td>    		
+    		<td th:text="${ottelu.vierasjoukkue.nimi}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')">
+    			<a class="btn btn-success" th:href="@{/tulos/{id}(id=${ottelu.ottelu_id})}">Lisää tulos</a></td>
+    	   		    <td sec:authorize="hasAuthority('ADMIN')">
+    			<a class="btn btn-danger" th:href="@{/poistaottelu/{id}(id=${ottelu.ottelu_id})}">Poista</a>
+    		</td>
+    	</tr>
+    	
+     </table>
+	 	 	
+</body>
+</html>

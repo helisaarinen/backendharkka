@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html 
+xmlns:th="http://www.thymeleaf.org"   
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+<head>
+    <title>Turnaukset</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Turnaukset</h1>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<h5>Kirjautuneena käyttäjä: <span style= "color: blue" sec:authentication="name">Name</span></h5>
+		</div>
+		
+		<div class="col-md-12">
+	    <p style="color:secondary" sec:authorize="hasAuthority('USER')">Täällä ei näy edit eikä delete.</p>
+		</div>
+	</div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+	
+    <table class="table table-striped" >
+		<tr>
+		<th>Turnauksen nimi</th>
+		<th>Alkupäivä</th>
+		<th>Loppupäivä</th>
+	</tr>  
+    	
+    	<tr th:each = "turnaus: ${turnaukset}">
+    		<td th:text="${turnaus.nimi}"></td>
+    		<td th:text="${turnaus.alkupva}"></td>
+    		<td th:text="${turnaus.loppupva}"></td>
+    	</tr>
+    	
+     </table>
+	 <a  class="btn btn-success" href="/lisaatur">Lisää turnaus</a>    		 
+	 	
+</body>
+</html>

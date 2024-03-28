@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+
+<head>
+	<title>Lisää ottelut</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Lisää ottelut</h1>
+
+	<div>
+	<form th:object="${ottelu}" th:action="@{tallennaottelu}" action="#" method="post">
+	
+		<div>
+		<label for="alkamisaika">Alkamisaika</label>
+	    <input type="datetime-local" id="alkamisaika" th:field="*{alkaa}" />
+	    <p th:if="${#fields.hasErrors('alkaa')}" th:errors="*{alkaa}" style="display: block; color: red;"></p>
+		</div>
+	
+		<label for="päättymisaika">Päättymisaika</label>
+    	<input type="datetime-local" id="päättymisaika" th:field="*{loppuu}" />
+    	<p th:if="${#fields.hasErrors('loppuu')}" th:errors="*{loppuu}" style="display: block; color: red;"></p>
+		
+		<div style="margin-bottom: 20px;"></div>
+		
+		<div class="col-md-4" style="clear: both; display: block; height: 10px;"></div>
+		<label for="deplist">Kotijoukkue</label> 
+		<select id="deplist" th:field="*{kotijoukkue}" class="form-control">
+	    	<option value=""selected>Valitse kotijoukkue</option>
+			<option th:each="joukkue: ${joukkueet}" th:value="${joukkue.joukkue_id}"
+			th:text="${joukkue.nimi}"></option>
+		</select>
+		<div th:if="${#fields.hasErrors('kotijoukkue')}" th:errors="*{kotijoukkue}" class="alert alert-danger"></div>
+		
+		
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<div class="col-md-4" style="clear: both; display: block; height: 10px;"></div>
+		<label for="deplist">Vierasjoukkue</label> 
+		<select id="deplist" th:field="*{vierasjoukkue}" class="form-control">
+	    	<option value=""selected>Valitse vierasjoukkue</option>
+			<option th:each="joukkue: ${joukkueet}" th:value="${joukkue.joukkue_id}" 
+			th:text="${joukkue.nimi}"></option>
+		</select>
+		<div th:if="${#fields.hasErrors('vierasjoukkue')}" th:errors="*{vierasjoukkue}" class="alert alert-danger"></div>
+	
+	
+	    <div class="col-md-12">
+        <div th:if="${virheviesti != null}" th:text="${virheviesti}" class="alert alert-danger"></div>
+    </div>
+		<div style="clear: both; display: block; height: 10px;"></div>
+
+		<div style="clear: both; display: block; height: 10px;"></div>
+		
+		<button type="submit" class="btn btn-success">Tallenna</button>
+	
+	</form>
+	</div>
+	
+	 <table class="table table-striped" >
+		<tr>
+			<th>Aika</th>
+		   	<th>Kotijoukkue</th>
+		    <th>Vierasjoukkue</th>
+		      
+		</tr>  
+		    	
+    	<tr th:each = "ottelu : ${ottelut}">
+        <td th:text="${#temporals.format(ottelu.alkaa, 'HH:mm') + ' - ' + #temporals.format(ottelu.loppuu, 'HH:mm')}"></td>
+    		<td th:text="${ottelu.kotijoukkue.nimi}"></td>
+    		<td th:text="${ottelu.vierasjoukkue.nimi}"></td>
+    	</tr>
+    	
+     </table>
+     
+	 <a  class="btn btn-success" href="/ottelulistaus">Valmis</a>    	
+	 <input class="btn btn-secondary" type="button" value="Peruuta" onclick="window.location.href='/ottelulistaus'" />
+     
+</body>
+</html>

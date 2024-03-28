@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Joukkueet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää joukkue</h1>
+	<div>
+
+		<form th:object="${joukkue}" th:action="@{tallenna}" action="#" method="post">
+
+			<div style="margin-bottom: 20px;">
+			<label for="nimi">Nimi</label>
+			<input type="text" id="nimi" th:field="*{nimi}" />
+			<p th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}"
+			style="display: block; color: red;"></p>
+			</div>
+
+			<div style="margin-bottom: 20px;">
+			<label for="yhteyshlo">Yhteyshenkilö</label> 
+			<input type="text" id="yhteyshlo"	th:field="*{yhteyshlo}" />
+			<p th:if="${#fields.hasErrors('yhteyshlo')}" th:errors="*{yhteyshlo}"
+			style="display: block; color: red;"></p>
+			</div>
+			
+			<div style="margin-bottom: 20px;">
+			<label for="email">Sähköpostiosoite</label> 
+			<input type="text" id="email"	th:field="*{email}" />
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+			style="display: block; color: red;"></p>
+			</div>
+
+			<label for="puh">Puhelinnumero</label> 
+			<input type="text"	th:field="*{puh}" />
+			<p th:if="${#fields.hasErrors('puh')}" th:errors="*{puh}"
+			style="display: block; color: red;"></p>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<div class="col-md-4"
+				style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="deplist">Seura</label> 
+			<select id="deplist" th:field="*{seura}" class="form-control">
+			    <option value=""selected>Valitse seura</option>
+				<option th:each="seura: ${seurat}" th:value="${seura.seura_id}"
+					th:text="${seura.nimi}"></option>
+			</select>
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input class="btn btn-success" type="submit" title="Tallenna" value="Tallenna"></input>
+			<input class="btn btn-secondary" type="button" value="Peruuta" onclick="window.location.href='/joukkuelistaus'" />
+			
+		</form>
+	</div>
+</body>
+</html>

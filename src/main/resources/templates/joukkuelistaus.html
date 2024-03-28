@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html 
+xmlns:th="http://www.thymeleaf.org"   
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+<head>
+    <title>Joukkueet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	
+	<div class="row">
+		<div class="col-md-4">
+					<h5>Kirjautuneena käyttäjä: <span style= "color: blue" sec:authentication="name">Name</span></h5>
+		</div>
+	</div>
+	
+	<div>
+	        <a href="/ottelulistaus">Ottelut</a>
+	</div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+	<h1>Joukkueet</h1>
+    <table class="table table-striped" >
+		<tr>
+
+<th>Joukkueen nimi
+    <a th:if="${jarjestys != 'asc'}" href="#" th:href="@{/joukkuelistaus(jarjestys='asc')}">▲</a>
+    <a th:else href="#" th:href="@{/joukkuelistaus(jarjestys='desc')}">▼</a>
+</th>
+		    <th>Seura</th>
+		    <th>Yhteyshenkilö</th>
+		    <th>Sähköpostiosoite</th>
+		    <th>Puhelinnumero</th>
+		    		    
+		   	<th sec:authorize="hasAuthority('ADMIN')">Edit</th> 
+		    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>  
+
+		      
+		</tr>  
+    	
+    	<tr th:each = "joukkue : ${joukkueet}">
+    		<td th:text="${joukkue.nimi}"></td>
+    		<td th:text="${joukkue.seura.nimi}"></td>
+    		<td th:text="${joukkue.yhteyshlo}"></td>
+    		<td th:text="${joukkue.email}"></td>
+    		<td th:text="${joukkue.puh}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')">
+    			<a class="btn-outline-primary" th:href="@{/muokkaa/{id}(id=${joukkue.joukkue_id})}">Edit</a></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')">
+ 				<a  class="btn btn-danger" th:href="@{/poista/{id}(id=${joukkue.joukkue_id})}">Delete</a></td>
+    		   		
+    	</tr>
+    	
+     </table>
+	 <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/lisaa">Lisää joukkue</a>    	
+	 
+	 <h1>Seurat</h1>
+	     <table class="table table-striped" >
+		<tr>
+		    <th>Nimi</th>
+		    <th>Kunta</th>
+		    <th>Verkkosivu</th>
+		    		    		    
+		   <!-- 	<th>Edit</th> 
+		    <th>Delete</th>  
+		    --> 
+		    <th sec:authorize="hasAuthority('ADMIN')"></th>		    
+		    <th sec:authorize="hasAuthority('ADMIN')"></th>
+		      
+		</tr>  
+    	
+    	<tr th:each = "seura : ${seurat}">
+    		<td th:text="${seura.nimi}"></td>
+    		<td th:text="${seura.kunta.kunnannimi}"></td>
+    		<td th:text="${seura.verkkosivu}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn-outline-primary" th:href="@{/muokkaaseura/{id}(id=${seura.seura_id})}">Edit</a></td>
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a  class="btn btn-danger" th:href="@{/poistaSeura/{id}(id=${seura.seura_id})}">Delete</a></td>
+    		
+    		
+    	</tr>
+    	
+     </table>
+	 <a sec:authorize="hasAuthority('ADMIN')"  class="btn btn-success" href="/lisaaseura">Lisää seura</a> 
+	 
+	 <table>
+	 <th>Kunta</th>
+	 <tr th:each = "kunta : ${kunnat}">
+	 <td th:text="${kunta.kunnannimi}"></td>
+	 </tr>
+	 </table>
+	 
+	 
+	 	
+</body>
+</html>
