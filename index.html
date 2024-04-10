@@ -13,5 +13,102 @@ xmlns:fa="http://www.thymeleaf.org/extras/font-awesome">
 
 <body>
 <h1>Kylän paras turnaus</h1>
+
+	<div>
+        <a th:if="${#authorization.expression('isAuthenticated()')}">Kirjautuneena käyttäjä: <span style= "color: blue" sec:authentication="name">Name</span></a>
+         	<div th:if="${#authorization.expression('isAuthenticated()')}"  style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div> 
+        <a th:unless="${#authorization.expression('isAuthenticated()')}" href="/login">Kirjaudu sisään</a>
+        
+        <a th:if="${#authorization.expression('isAuthenticated()')}" href="/ottelulistaus">Muokkaa otteluita</a>
+       
+    </div>
+    
+    <div>
+    <h3>Tulossa</h3>
+    <table class="table table-striped">
+        <tr>
+            <th>Aika</th>
+            <th>Kotijoukkue</th>
+            <th></th>
+            <th>Vierasjoukkue</th>
+                        <th></th>
+        </tr>  
+        <tr th:each="ottelu : ${ottelut}" th:if="${ottelu.loppuu > #temporals.createNow()}">
+            <td th:text="${#temporals.format(ottelu.alkaa, 'HH:mm') + ' - ' + #temporals.format(ottelu.loppuu, 'HH:mm')}"></td>
+            <td th:text="${ottelu.kotijoukkue.nimi}"></td>
+            <td>-</td>    		
+            <td th:text="${ottelu.vierasjoukkue.nimi}"></td>
+           <td th:if="${ottelu.alkaa < #temporals.createNow() and ottelu.loppuu > #temporals.createNow()}">
+            <span class="blink">Meneillään</span>
+        </td>
+        <td th:unless="${ottelu.alkaa < #temporals.createNow() and ottelu.loppuu > #temporals.createNow()}"></td> <!-- Tyhjä sarake, jos "Meneillään" -teksti ei näy -->
+</tr>
+    </table>
+    </div>
+    
+    
+    <h2>Pelatut</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Aika</th>
+            <th>Kotijoukkue</th>
+            <th></th>
+            <th>Vierasjoukkue</th>
+            <th>Maalit</th>	      
+        </tr>
+    <tr th:each="ottelu : ${ottelut}" th:if="${ottelu.loppuu <= #temporals.createNow()}">
+        <td th:text="${#temporals.format(ottelu.alkaa, 'HH:mm') + ' - ' + #temporals.format(ottelu.loppuu, 'HH:mm')}"></td>
+        <td th:text="${ottelu.kotijoukkue.nimi}" th:class="${ottelu.kotimaalit > ottelu.vierasmaalit} ? 'bold' : ''"></td>
+        <td>-</td>    		
+        <td th:text="${ottelu.vierasjoukkue.nimi}" th:class="${ottelu.vierasmaalit > ottelu.kotimaalit} ? 'bold' : ''"></td>
+ <td>
+            <span th:text="${ottelu.kotimaalit}" th:class="${ottelu.kotimaalit > ottelu.vierasmaalit} ? 'bold' : ''"></span>
+            <span th:text="' - '"></span>
+            <span th:text="${ottelu.vierasmaalit}" th:class="${ottelu.vierasmaalit > ottelu.kotimaalit} ? 'bold' : ''"></span>
+        </td>        
+
+    </tr>
+    </table>
+    
+
+    <!-- 
+    <div>
+       
+        <i th:if="${#authorization.expression('isAuthenticated()')}" class="fas fa-lock"></i>
+
+        <i th:unless="${#authorization.expression('isAuthenticated()')}" class="fas fa-lock-open"></i>
+    </div>
+ 		<div class="row">
+		<div class="col-md-12">
+			<h5 th:if="${#authorization.expression('isAuthenticated()')}">Kirjautuneena käyttäjä: <span style= "color: blue" sec:authentication="name">Name</span></h5>
+		</div>
+		
+		<div class="col-md-12">
+	    <p style="color:secondary" sec:authorize="hasAuthority('USER')">Täällä ei näy edit eikä delete.</p>
+		</div>
+
+	</div>
+ 
+ 	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div> 
+  
+  
+  
+  <table>     
+     	<tr>
+		<th>Etunimi</th>
+		<th>Sukunimi</th>
+
+	</tr>
+
+  </table>
+   -->
 </body>
 </html>
