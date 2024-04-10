@@ -123,7 +123,16 @@ public class OtteluController {
     	model.addAttribute("kunnat", krepository.findAll());
     	return "muokkaaottelutulos";
     }
-    
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("poistaottelu/{id}")
+	public String poistaOttelu(@PathVariable("id") Long id, Model model) {
+		System.out.println("poista ottelu " + id);
+		orepository.deleteById(id);
+		return "redirect:/ottelulistaus";
+	}
+
+    /* 5.4. poistetaan getjoukkueet
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("poistaottelu/{id}")
 	public String poistaOttelu(@PathVariable("id") Long id, Model model) {
@@ -135,7 +144,7 @@ public class OtteluController {
 		}
 		return "redirect:/ottelulistaus";
 	}
-
+*/
 	public OtteluController() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -35,11 +35,11 @@ public class Ottelu {
 	private LocalDateTime loppuu;
 	
 	@ManyToOne
-	@JoinColumn(name="kotijoukkue_id")
+	@JoinColumn(name="kotijoukkue")
 	private Joukkue kotijoukkue;
 	
 	@ManyToOne
-	@JoinColumn(name="vierasjoukkue_id")
+	@JoinColumn(name="vierasjoukkue")
 	private Joukkue vierasjoukkue;
 	
 	
@@ -48,10 +48,7 @@ public class Ottelu {
 
 	@Min(value = 0, message ="Maalien määrä ei voi olla negatiivinen.")
 	private Integer vierasmaalit;
-	
-	@OneToMany(mappedBy= "ottelu")
-	private List<Joukkue> joukkueet;
-
+		
 	public Ottelu() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -66,7 +63,7 @@ public class Ottelu {
 		this.vierasjoukkue = vierasjoukkue;
 		this.kotimaalit = kotimaalit;
 		this.vierasmaalit = vierasmaalit;
-		this.joukkueet = joukkueet;
+
 	}
 
 	public Long getOttelu_id() {
@@ -131,13 +128,6 @@ public class Ottelu {
 		this.vierasmaalit = vierasmaalit;
 	}
 
-	public List<Joukkue> getJoukkueet() {
-		return joukkueet;
-	}
-
-	public void setJoukkueet(List<Joukkue> joukkueet) {
-		this.joukkueet = joukkueet;
-	}
 
 	@Override
 	public String toString() {

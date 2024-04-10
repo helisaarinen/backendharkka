@@ -41,10 +41,7 @@ public class Joukkue {
     @OneToMany(mappedBy = "vierasjoukkue")
     private List<Ottelu> vierasjoukkue;
     
-    @ManyToOne
-    private Ottelu ottelu;
-
-	public Joukkue() {
+  	public Joukkue() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -62,7 +59,6 @@ public class Joukkue {
 		this.seura = seura;
 		this.kotijoukkue = kotijoukkue;
 		this.vierasjoukkue = vierasjoukkue;
-		this.ottelu = ottelu;
 	}
 	
 	public Joukkue(
@@ -75,6 +71,17 @@ public class Joukkue {
 		this.email = email;
 		this.puh = puh;
 		this.seura = seura;
+}
+	
+	public Joukkue(
+			@NotEmpty(message = "Joukkueella on oltava nimi.") @Size(min = 2, max = 250, message = "Nimessä oltava merkkejä 2-250.") String nimi,
+			String logo, String yhteyshlo, String email, String puh) {
+		super();
+		this.nimi = nimi;
+		this.logo = logo;
+		this.yhteyshlo = yhteyshlo;
+		this.email = email;
+		this.puh = puh;
 }
 
 	public long getJoukkue_id() {
@@ -147,14 +154,6 @@ public class Joukkue {
 
 	public void setVierasjoukkue(List<Ottelu> vierasjoukkue) {
 		this.vierasjoukkue = vierasjoukkue;
-	}
-
-	public Ottelu getOttelu() {
-		return ottelu;
-	}
-
-	public void setOttelu(Ottelu ottelu) {
-		this.ottelu = ottelu;
 	}
 
 	@Override

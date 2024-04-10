@@ -32,11 +32,11 @@ public class TurnausApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TurnausApplication.class, args);
 	}
+
 	
 	
-	/*KOMMENTOI POIS, KUN KÄYTÄT TIETOKANTAA*/
-	
-	
+	/*KOMMENTOI POIS, KUN KÄYTÄT TIETOKANTAA
+		
 	@Bean
 	public CommandLineRunner demoData(
 			JoukkueRepository jrepository, 
@@ -115,5 +115,5 @@ public class TurnausApplication {
 		};
 		};
 	
-
+*/
 }
