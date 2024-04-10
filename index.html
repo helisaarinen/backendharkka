@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html 
+xmlns:th="http://www.thymeleaf.org"   
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+xmlns:fa="http://www.thymeleaf.org/extras/font-awesome">
+
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        window.location.href = "/etusivu"; // Muuta polku tarvittaessa
-    </script>
+    <title>Etusivu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
 <body>
-    <p>If you are not redirected automatically, <a href="/templates/etusivu.html">click here</a>.</p>
+<h1>Kylän paras turnaus</h1>
 </body>
 </html>
