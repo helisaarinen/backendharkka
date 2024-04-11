@@ -11,5 +11,6 @@ public interface OtteluRepository extends CrudRepository<Ottelu, Long>{
 	
 	List<Ottelu> findByKotijoukkue(Joukkue joukkue);
 	List<Ottelu> findByVierasjoukkue(Joukkue joukkue);
+	
 
 }

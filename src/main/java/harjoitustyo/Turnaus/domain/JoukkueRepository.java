@@ -12,7 +12,7 @@ public interface JoukkueRepository extends CrudRepository<Joukkue, Long> {
 	List<Joukkue> findByNimi (String nimi);
 	Optional<Joukkue> findById (Long joukkue_id);
 
-	List<Joukkue> findAllByOrderByNimiAsc(); // Järjestää joukkueet nimen mukaan nousevassa järjestyksessä
-	List<Joukkue> findAllByOrderByNimiDesc(); // Järjestää joukkueet nimen mukaan laskevassa järjestyksessä
+	List<Joukkue> findAllByOrderByNimiAsc(); // Nouseva järjestys
+	List<Joukkue> findAllByOrderByNimiDesc(); // Laskeva järjestys
 			
 }

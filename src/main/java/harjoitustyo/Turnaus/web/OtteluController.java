@@ -132,19 +132,7 @@ public class OtteluController {
 		return "redirect:/ottelulistaus";
 	}
 
-    /* 5.4. poistetaan getjoukkueet
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("poistaottelu/{id}")
-	public String poistaOttelu(@PathVariable("id") Long id, Model model) {
-		System.out.println("poista ottelu " + id);
-		if(orepository.findById(id).get().getJoukkueet().isEmpty()) {
-			orepository.deleteById(id);
-		}else {
-			System.out.println("Ottelua ei voi poistaa, kun siinä on joukkueita.");
-		}
-		return "redirect:/ottelulistaus";
-	}
-*/
+
 	public OtteluController() {
 		super();
 		// TODO Auto-generated constructor stub

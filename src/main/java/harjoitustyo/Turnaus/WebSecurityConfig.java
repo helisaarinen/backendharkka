@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 						.disable()))
 				.formLogin(
 						formlogin -> formlogin
-				//		.loginPage("/login") //JOs on tehnynä oma Login-sivu, tämä otetaan pois kommenteista
+						.loginPage("/login") //Jos on tehnynä oma Login-sivu, tämä otetaan pois kommenteista. Controllerissa oltava @RequestMapping.
 						.defaultSuccessUrl("/joukkuelistaus", true) //kun kirjautuminen on onnistunut, menee tälle sivulle
 						.permitAll())
 				//.logout(logout -> logout.permitAll()); //masiina hoitaa session sulkemisen, ei tarvi tehdä mitään

@@ -23,7 +23,7 @@ xmlns:fa="http://www.thymeleaf.org/extras/font-awesome">
 	</div> 
         <a th:unless="${#authorization.expression('isAuthenticated()')}" href="/login">Kirjaudu sisään</a>
         
-        <a th:if="${#authorization.expression('isAuthenticated()')}" href="/ottelulistaus">Muokkaa otteluita</a>
+        <a th:if="${#authorization.expression('isAuthenticated()')}" href="/ottelulistaus">Muokkaa joukkueita ja otteluita</a>
        
     </div>
     
