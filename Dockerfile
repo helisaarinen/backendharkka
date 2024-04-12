@@ -15,7 +15,7 @@ FROM eclipse-temurin:17-jre-focal
 COPY --from=build /home/app/target/Turnaus-0.0.1-SNAPSHOT.jar /usr/local/lib/pkg.jar
 EXPOSE 8080
 # Set environment variables for PostgreSQL connection
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/Turnaus
+ENV SPRING_DATASOURCE_URL=spring.datasource.url=postgres://postgres:Koulujuttu2024!@postgres:5432/Turnaus
 ENV SPRING_DATASOURCE_USERNAME=postgres
 ENV SPRING_DATASOURCE_PASSWORD=Koulujuttu2024!
 # Set the command to run the application
