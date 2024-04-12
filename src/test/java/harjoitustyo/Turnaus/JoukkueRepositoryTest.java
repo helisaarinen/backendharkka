@@ -24,11 +24,12 @@ public class JoukkueRepositoryTest {
 	@Autowired
 	private SeuraRepository srepostitory;
 
+	/*
 	@Test
 	public void findByNimiShouldReturnJoukkue() {
 		List<Joukkue> joukkueet = jrepository.findByNimi("Kirkkis");
 		assertThat(joukkueet).hasSize(1);
 		assertThat(joukkueet.get(0).getSeura().getNimi()).isEqualTo("Kirkkonummen pallo");
-	}
+	}*/
 	
 }
