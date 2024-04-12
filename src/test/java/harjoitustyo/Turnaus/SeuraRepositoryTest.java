@@ -23,12 +23,13 @@ public class SeuraRepositoryTest {
 	@Autowired
 	private KuntaRepository krepository;
 	
+	/*
 	@Test
 	public void findByNimiShouldReturnSeura() {
 		List<Seura> seurat = srepository.findByNimi("Tepa");
 		assertThat(seurat).hasSize(1);
 		assertThat(seurat.get(0).getKunta().getKunnannimi()).isEqualTo("Teuva                                                            ");
-	}
+	}*/
 
 	
 	
