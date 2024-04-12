@@ -26,9 +26,9 @@ public class JoukkueRepositoryTest {
 
 	@Test
 	public void findByNimiShouldReturnJoukkue() {
-		List<Joukkue> joukkueet = jrepository.findByNimi("Koipsi");
+		List<Joukkue> joukkueet = jrepository.findByNimi("Kirkkis");
 		assertThat(joukkueet).hasSize(1);
-		assertThat(joukkueet.get(0).getSeura().getNimi()).isEqualTo("Koips");
+		assertThat(joukkueet.get(0).getSeura().getNimi()).isEqualTo("Kirkkonummen pallo");
 	}
 	
 }

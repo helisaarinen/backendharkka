@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Size;
 public class Joukkue {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long joukkue_id;
 	
 	@NotEmpty(message= "Joukkueella on oltava nimi.")

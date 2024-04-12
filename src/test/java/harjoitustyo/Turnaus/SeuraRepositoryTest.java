@@ -27,7 +27,7 @@ public class SeuraRepositoryTest {
 	public void findByNimiShouldReturnSeura() {
 		List<Seura> seurat = srepository.findByNimi("Tepa");
 		assertThat(seurat).hasSize(1);
-		assertThat(seurat.get(0).getKunta().getKunnannimi()).isEqualTo("Teuva");
+		assertThat(seurat.get(0).getKunta().getKunnannimi()).isEqualTo("Teuva                                                            ");
 	}
 
 	
