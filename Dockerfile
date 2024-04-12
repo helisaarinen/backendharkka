@@ -19,4 +19,4 @@ ENV SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/Turnaus
 ENV SPRING_DATASOURCE_USERNAME=postgres
 ENV SPRING_DATASOURCE_PASSWORD=Koulujuttu2024!
 # Wait for PostgreSQL to be ready before starting the application
-CMD ["sh", "-c", "until nc -z -v -w30 localhost 5432; do echo 'Waiting for PostgreSQL...'; sleep 1; done && java -jar /usr/local/lib/pkg.jar"]
+CMD ["sh", "-c", "while ! nc -z localhost 5432; do sleep 1; done && java -jar /usr/local/lib/pkg.jar"]
